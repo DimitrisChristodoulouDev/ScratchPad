@@ -1,0 +1,8 @@
+sll
+srl
+sra
+sllv
+srlv
+srav
+beq
+bne

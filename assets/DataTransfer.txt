@@ -1,0 +1,13 @@
+lw
+lh
+lhu
+lb
+lbu
+sw
+sh
+sb
+lui
+mfhi
+mflo
+mfcZ
+mtcZ

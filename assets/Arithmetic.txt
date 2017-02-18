@@ -1,0 +1,10 @@
+add
+addu
+sub
+subu
+addi
+addiu
+mult
+multu
+div
+divu

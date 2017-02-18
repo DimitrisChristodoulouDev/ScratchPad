@@ -1,0 +1,10 @@
+and
+andi
+or
+ori
+xor
+xori
+nor
+slt
+sltu
+slti
