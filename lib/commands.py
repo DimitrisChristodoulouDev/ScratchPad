@@ -1,13 +1,13 @@
 from random import *
 from itertools import *
 
-conf_file = open('conf.txt', 'w')  # output file with commands
+conf_file = open('assets/conf.txt', 'w')  # output file with commands
 
 LOGICAL = [5, 7]
 ARITHMETIC = [7, 10]
 BITWISE = [2, 5]
 DATA_TRANSFER = [10, 15]
-PC = 5
+PC = 5  # Multiply with cycles
 
 
 def create_arrays():

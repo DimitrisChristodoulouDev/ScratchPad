@@ -14,8 +14,5 @@ def preferences():
 
 def generate_input_file():
     print(preferences())
-
-
-
-
     commands = get_commands('assets/conf.txt')
+    print(commands)
