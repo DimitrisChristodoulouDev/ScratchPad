@@ -1,9 +1,9 @@
-
 def get_commands(path):
     try:
         return open(path).read().splitlines()
     except FileNotFoundError:
         print('Not found : ' + path)
+
 
 def preferences():
     try:
@@ -13,6 +13,6 @@ def preferences():
 
 
 def generate_input_file():
-    print(preferences())
-    commands = get_commands('assets/conf.txt')
-    print(commands)
+    commands = get_commands('assets/conf.txt')  # Read commands
+    for row in commands:
+        print(row.split('\t'))
