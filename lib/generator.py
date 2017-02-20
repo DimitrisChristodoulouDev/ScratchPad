@@ -1,8 +1,10 @@
 from random import *
 import numpy as np
 import scipy.stats
+from array import array
 
 COMMANDS_PATH = 'assets/conf.txt'  # Commands file path
+output_file = open('assets/output.txt', 'w')
 
 
 def generate_input_file():
@@ -10,6 +12,14 @@ def generate_input_file():
     get_commands() #6 Read commands filr
     run_generation() #9. The main generator
 
+
+def push_to_file(row):
+    print(str(row), file=output_file)
+
+
+def prettify_row(row):
+    pass
+    #return str(row['name'] + '\t' + str(row['cycles']) + '\t' + str(row['pc']))
 
 
 def get_commands():
@@ -21,9 +31,8 @@ def get_commands():
 
 
 def loop_flag():  # Selini
-    var = round(uniform(0, 1), 2)
-    print(var)
-    return True if var > 0.49 else False
+    var = uniform(0, 1)
+    return False # if var > 0.50 else False
 
 
 def commands_in_loop(): #11
@@ -60,23 +69,59 @@ def get_command():
     return choice(commands_set)
 
 
+def print_header():
+    print(str("instruction_type" + '\t' + "cycles" + '\t' + "power consumption"), file = output_file)
+
+
 def run_generation():
-    while True:
-        print('Commands in loop', commands_in_loop())
-        print('Repeats of loop', repeats_loop())
-        print('Commands in serial', commands_in_serial())
-        print('Loop flag - selini ', loop_flag())
+    print_header()
 
-        commandsInLoop = commands_in_loop() #10
-        repeatsLoop = repeats_loop() #12
-        commandsInSerial = commands_in_serial() #14
+    for count in range(0, 3):
+        print('Iteration', count)
+        num_of_com_loop = commands_in_loop()
+        num_of_serial = commands_in_serial()
+        num_of_loop_rep = repeats_loop()
 
-        if(loop_flag()): #15. True => Loop (megalitero tu 0.5)
-            #Make a block of commands with size = commandsInLoop
-            #Repeat that for times = repeatsLoop
-        else # Serial
-            # Make a block of commands with size = commandsInSerial
+        print('Flag', loop_flag())
+        print('Loop', num_of_com_loop)
+        print('Repeat', num_of_loop_rep)
+        print('Serial', num_of_serial)
 
 
 
 
+
+        my_arr = []
+        if loop_flag():
+            #run loop
+            for i in range(0, num_of_com_loop):
+                my_arr.append(get_command())
+                # name = command[0]
+                # cycles = command[1]
+                # power_consumption = command[2]
+            for x in range(0, num_of_loop_rep):
+                for y in my_arr:
+                   if x==0:
+                       y = y+'\t1'+'\t0'
+                   else:
+                       y=y+'\t1'+'\t1'
+                   push_to_file(y)
+                   print('Serial')
+                   for i in range(0, num_of_serial):
+                       push_to_file(get_command())
+        else:
+            print('Serial')
+            for i in range(0, num_of_serial):
+                push_to_file(get_command()+'\t0'+'\tx')
+            for i in range(0, num_of_com_loop):
+                my_arr.append(get_command())
+                # name = command[0]
+                # cycles = command[1]
+                # power_consumption = command[2]
+            for x in range(0, num_of_loop_rep):
+                for y in my_arr:
+                    if x == 0:
+                        y = y + '\t1' + '\t0'
+                    else:
+                        y = y + '\t1' + '\t1'
+                    push_to_file(y)
