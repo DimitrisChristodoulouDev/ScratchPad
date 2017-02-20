@@ -1,13 +1,5 @@
 from lib.commands import *
 from lib.generator import *
-import time
 
-
-start_time = time.time()
-generate_commands()
-print("--- %s seconds for creating conf file  ---\n" % ( round(float(time.time() - start_time))))
-
-
-generate_input_file()  # for the parser
-
-
+generate_commands()  # To create the file with the commands
+generate_input_file()  # Create the input file to use in the parser
